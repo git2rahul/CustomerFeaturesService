@@ -10,5 +10,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="CustomerFeatures %28copy%29.cs" />
+    <Compile Remove="CustomerFeatures %28copy%29.cs" />
   </ItemGroup>
 </Project>
