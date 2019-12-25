@@ -29,6 +29,9 @@ namespace CustomerFeaturesApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetFeatures()
         {
+            var Message = $" Action GetFeatures called at {DateTime.UtcNow.ToLongTimeString()}";
+            _logger.LogInformation("+++++++++++++ Message displayed +++++++++++++: {Message}", Message);
+        
             IEnumerable<CustomerFeaturesCollection> features = _customerFeatureProvider.GetAllFeatures();
 
             if (features != null)
@@ -44,6 +47,9 @@ namespace CustomerFeaturesApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetCustomerFeatureList(string customerId)
         {
+            var Message = $" Action GetCustomerFeatureList called at {DateTime.UtcNow.ToLongTimeString()} with customerId as {customerId}";
+            _logger.LogInformation("+++++++++++++ Message displayed +++++++++++++: {Message}", Message);
+
             IEnumerable<CustomerFeaturesCollection> features = _customerFeatureProvider.GetCustomerFeatures(customerId);
 
             if (features != null)
@@ -60,6 +66,9 @@ namespace CustomerFeaturesApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetCustomerFeature(string customerId, int featureId)
         {
+            var Message = $" Action GetCustomerFeature called at {DateTime.UtcNow.ToLongTimeString()} with customerId as {customerId} and featureId as {featureId.ToString()}";
+            _logger.LogInformation("+++++++++++++ Message displayed +++++++++++++: {Message}", Message);
+
             CustomerFeaturesCollection feature = _customerFeatureProvider.GetCustomerFeature(customerId, featureId);
 
             if (feature != null)
