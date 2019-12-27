@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  customerfeaturesservice:
+    image: docker2rahulsingh/customerfeaturesservice
+    build:
+      context: .
+      dockerfile: CustomerFeaturesService/Dockerfile
