@@ -1,3 +1,4 @@
+using System.IO;
 using CustomerFeature.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,7 +29,7 @@ namespace CustomerFeaturesService
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
-           services.AddTransient<ICustomerFeatureProvider>(services => new CustomerFeatureProvider(Configuration["CustomerFeatureStoreDatabaseSettings:ConnectionString"]));
+            services.AddTransient<ICustomerFeatureProvider>(services => new CustomerFeatureProvider(Configuration["CustomerFeatureStoreDatabaseSettings:ConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
