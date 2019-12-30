@@ -34,12 +34,13 @@ namespace CustomerFeaturesApi.Controllers
             var Message = $" Action GetFeatures called at {DateTime.UtcNow.ToLongTimeString()}";
             _logger.LogInformation("+++++++++++++ Message displayed +++++++++++++: {Message}", Message);
 
-            var features = MapFeaturesDto(_customerFeatureProvider.GetAllFeatures().ToList());
+            
+            var features = _customerFeatureProvider.GetAllFeatures();
 
             if (features == null)
                 return NotFound();
 
-            return Ok(features);
+            return Ok(MapFeaturesDto(features.ToList()));
         }
 
         #endregion
@@ -53,10 +54,10 @@ namespace CustomerFeaturesApi.Controllers
             var Message = $" Action GetCustomerFeatureList called at {DateTime.UtcNow.ToLongTimeString()} with customerId as {customerId}";
             _logger.LogInformation("+++++++++++++ Message displayed +++++++++++++: {Message}", Message);
 
-            var features = MapCustomerFeaturesDto(_customerFeatureProvider.GetCustomerFeatures(customerId).ToList());
+            var features = _customerFeatureProvider.GetCustomerFeatures(customerId);
 
             if (features != null)
-                return Ok(features);
+                return Ok(MapCustomerFeaturesDto(features.ToList()));
             else
                 return NotFound();
 

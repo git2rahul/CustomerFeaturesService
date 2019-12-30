@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc5" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Properties\launchSettings.json" />
+    <Content Remove="pub\appsettings.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CustomerFeature.Data\CustomerFeature.Repositories.csproj">
