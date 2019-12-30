@@ -13,6 +13,6 @@ namespace CustomerFeaturesApi.Models
         [Required]
         public DateTime EnrollmentDate { get; set; }
 
-        public string AdditionalSettings { get; set; }
+        public string FeatureSettings { get; set; }
     }
 }

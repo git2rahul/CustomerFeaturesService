@@ -28,19 +28,20 @@ namespace CustomerFeaturesApi.Controllers
         #region Get Features
         [HttpGet("")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(List<CustomerFeaturesDto>), (int)HttpStatusCode.OK)]
-        public ActionResult<List<CustomerFeaturesApi.Models.CustomerFeature>> GetFeatures()
+        [ProducesResponseType(typeof(List<CustomerFeaturesApi.Models.Feature>), (int)HttpStatusCode.OK)]
+        public ActionResult<List<CustomerFeaturesApi.Models.Feature>> GetFeatures()
         {
             var Message = $" Action GetFeatures called at {DateTime.UtcNow.ToLongTimeString()}";
             _logger.LogInformation("+++++++++++++ Message displayed +++++++++++++: {Message}", Message);
 
-            var features = MapCustomerFeaturesDto(_customerFeatureProvider.GetAllFeatures().ToList());
+            var features = MapFeaturesDto(_customerFeatureProvider.GetAllFeatures().ToList());
 
             if (features == null)
                 return NotFound();
 
             return Ok(features);
         }
+
         #endregion
 
         #region Get Customer Feature list
@@ -118,7 +119,46 @@ namespace CustomerFeaturesApi.Controllers
                 FeatureId = customerFeaturesDto.FeatureId,
                 FeatureName = customerFeaturesDto.FeatureName,
                 EnrollmentDate = customerFeaturesDto.EnrollmentDate,
-                AdditionalSettings = customerFeaturesDto.AdditionalSettings
+                FeatureSettings = customerFeaturesDto.FeaturesSetting
+            };
+        }
+        #endregion
+
+        #region MapFeaturesDto
+        /// <summary>
+        /// MapFeaturesDto
+        /// </summary>
+        /// <param name="featuresDto"></param>
+        /// <returns>List of Feature</returns>
+        private List<CustomerFeaturesApi.Models.Feature> MapFeaturesDto(List<CustomerFeaturesDto> featuresDto)
+        {
+
+            var features = new List<CustomerFeaturesApi.Models.Feature>();
+
+            if (featuresDto != null || featuresDto.Count < 1)
+                featuresDto.ForEach(CustomerFeaturesDto => features
+                   .Add(MapFeatureDto(CustomerFeaturesDto)));
+
+            return features;
+        }
+        #endregion
+
+        #region MapFeatureDto
+        /// <summary>
+        /// MapFeatureDto
+        /// </summary>
+        /// <param name="customerFeaturesDto"></param>
+        /// <returns>Feature</returns>
+        private CustomerFeaturesApi.Models.Feature MapFeatureDto(CustomerFeaturesDto customerFeaturesDto)
+        {
+            return new CustomerFeaturesApi.Models.Feature
+            {
+                FeatureId = customerFeaturesDto.FeatureId,
+                FeatureName = customerFeaturesDto.FeatureName,
+                CreationDate = customerFeaturesDto.CreationDate,
+                DefaultState = customerFeaturesDto.DefaultState,
+                EffectiveDate = customerFeaturesDto.EffectiveDate,
+                ExpirationDate = customerFeaturesDto.ExpirationDate
             };
         }
         #endregion

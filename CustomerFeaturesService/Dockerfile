@@ -5,18 +5,15 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
-
-COPY CustomerFeaturesService/CustomerFeaturesService.csproj CustomerFeaturesService/
-COPY CustomerFeature.Data/CustomerFeature.Data.csproj CustomerFeature.Data/
-
-RUN dotnet restore "CustomerFeaturesService/CustomerFeaturesService.csproj"
-
+COPY CustomerFeaturesService/CustomerFeaturesApi.csproj CustomerFeaturesService/
+COPY /CustomerFeature.Data/CustomerFeature.Repositories.csproj CustomerFeature.Data/
+RUN dotnet restore "CustomerFeaturesService/CustomerFeaturesApi.csproj"
 COPY . .
 WORKDIR "/src/CustomerFeaturesService"
-RUN dotnet build "CustomerFeaturesService.csproj" -c Release -o /app/build
+RUN dotnet build "CustomerFeaturesApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "CustomerFeaturesService.csproj" -c Release -o /app/publish
+RUN dotnet publish "CustomerFeaturesApi.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

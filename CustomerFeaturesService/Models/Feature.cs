@@ -1,14 +1,11 @@
-﻿namespace CustomerFeature.Repositories
+﻿using System;
+namespace CustomerFeaturesApi.Models
 {
-    public class CustomerFeaturesDto
+    public class Feature
     {
         public int FeatureId { get; set; }
 
         public string FeatureName { get; set; }
-
-        public System.DateTime EnrollmentDate { get; set; }
-
-        public string FeaturesSetting { get; set; }
 
         public bool DefaultState { get; set; }
 
