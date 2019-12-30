@@ -1,18 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CustomerFeature.Data;
-using CustomerFeaturesApi.Models;
+using CustomerFeature.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace CustomerFeaturesService
@@ -37,7 +28,7 @@ namespace CustomerFeaturesService
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
-            services.AddTransient<ICustomerFeatureProvider>(services => new CustomerFeatureProvider(@"Server=tcp:aayv89eo9h.database.windows.net,1433;Initial Catalog=CustomerFeatures;Persist Security Info=False;User ID=unravel;Password=Ticket@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+           services.AddTransient<ICustomerFeatureProvider>(services => new CustomerFeatureProvider(Configuration["CustomerFeatureStoreDatabaseSettings:ConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

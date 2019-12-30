@@ -1,11 +1,11 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerFeaturesService", "CustomerFeaturesService\CustomerFeaturesService.csproj", "{0019810D-0467-4DE9-82D8-42E244D69F3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerFeaturesApi", "CustomerFeaturesService\CustomerFeaturesApi.csproj", "{0019810D-0467-4DE9-82D8-42E244D69F3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerFeature.Data", "CustomerFeature.Data\CustomerFeature.Data.csproj", "{24169382-E39B-4119-98A0-BB3993C4E217}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerFeature.Repositories", "CustomerFeature.Data\CustomerFeature.Repositories.csproj", "{24169382-E39B-4119-98A0-BB3993C4E217}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7A75F2EA-B0C1-46E4-948A-D05D4F2A3356}"
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "docker-compose", "docker-compose.dcproj", "{B6450257-8D09-41B1-B4F7-FE6A36EF3A4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +21,9 @@ Global
 		{24169382-E39B-4119-98A0-BB3993C4E217}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24169382-E39B-4119-98A0-BB3993C4E217}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24169382-E39B-4119-98A0-BB3993C4E217}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A75F2EA-B0C1-46E4-948A-D05D4F2A3356}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A75F2EA-B0C1-46E4-948A-D05D4F2A3356}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A75F2EA-B0C1-46E4-948A-D05D4F2A3356}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A75F2EA-B0C1-46E4-948A-D05D4F2A3356}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6450257-8D09-41B1-B4F7-FE6A36EF3A4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6450257-8D09-41B1-B4F7-FE6A36EF3A4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6450257-8D09-41B1-B4F7-FE6A36EF3A4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6450257-8D09-41B1-B4F7-FE6A36EF3A4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

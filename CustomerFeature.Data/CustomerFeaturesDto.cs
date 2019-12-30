@@ -1,6 +1,6 @@
-﻿namespace CustomerFeature.Data
+﻿namespace CustomerFeature.Repositories
 {
-    public class CustomerFeaturesCollection
+    public class CustomerFeaturesDto
     {
         public int FeatureId { get; set; }
 

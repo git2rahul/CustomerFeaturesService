@@ -5,9 +5,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
+
 COPY CustomerFeaturesService/CustomerFeaturesService.csproj CustomerFeaturesService/
 COPY CustomerFeature.Data/CustomerFeature.Data.csproj CustomerFeature.Data/
+
 RUN dotnet restore "CustomerFeaturesService/CustomerFeaturesService.csproj"
+
 COPY . .
 WORKDIR "/src/CustomerFeaturesService"
 RUN dotnet build "CustomerFeaturesService.csproj" -c Release -o /app/build
