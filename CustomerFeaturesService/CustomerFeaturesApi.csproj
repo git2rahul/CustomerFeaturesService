@@ -6,6 +6,11 @@
     <UserSecretsId>52e19b86-bae7-472d-b312-e6e3b590273a</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'CustomerFeaturesService' ">
+    <StartAction>Project</StartAction>
+    <LaunchUrl>Features</LaunchUrl>
+    <ApplicationURL>https://localhost:5001;http://localhost:5000</ApplicationURL>
+  </PropertyGroup>
   <ItemGroup>
   </ItemGroup>
 
@@ -26,7 +31,7 @@
     <Content Remove="Properties\launchSettings.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomerFeature.Data\CustomerFeature.Data.csproj">
+    <ProjectReference Include="..\CustomerFeature.Data\CustomerFeature.Repositories.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>

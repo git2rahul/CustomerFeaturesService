@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CustomerFeaturesApi.Models
 {
-    public class CustomerFeatures
+    public class CustomerFeature
     {
         public int FeatureId { get; set; }
 

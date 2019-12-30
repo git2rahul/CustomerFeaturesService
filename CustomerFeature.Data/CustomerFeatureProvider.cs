@@ -4,7 +4,7 @@ using System.Linq;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
-namespace CustomerFeature.Data
+namespace CustomerFeature.Repositories
 {
     public class CustomerFeatureProvider : ICustomerFeatureProvider
     {
@@ -19,15 +19,15 @@ namespace CustomerFeature.Data
         /// Operation to get list of all features available for any customer to configure.
         /// </summary>
         /// <returns>List of features of type IEnumerable</returns>
-        public IEnumerable<CustomerFeaturesCollection> GetAllFeatures()
+        public IEnumerable<CustomerFeaturesDto> GetAllFeatures()
         {
-            IEnumerable<CustomerFeaturesCollection> customerFeatures = null;
+            IEnumerable<CustomerFeaturesDto> customerFeatures = null;
          
             try
             {
                 using (var connnection = new SqlConnection(_connectionString))
                 {
-                    customerFeatures = connnection.Query<CustomerFeaturesCollection>("EXEC [CustomerFeatures].[GetFeaturesList];");
+                    customerFeatures = connnection.Query<CustomerFeaturesDto>("EXEC [GetFeaturesList];");
                    
                 }
             }
@@ -44,15 +44,15 @@ namespace CustomerFeature.Data
         /// Operation to get list of all configured features for a customer.
         /// </summary>
         /// <returns>List of features of type IEnumerable</returns>
-        public IEnumerable<CustomerFeaturesCollection> GetCustomerFeatures(string customerno)
+        public IEnumerable<CustomerFeaturesDto> GetCustomerFeatures(string customerno)
         {
-            IEnumerable<CustomerFeaturesCollection> customerFeatures = null;
+            IEnumerable<CustomerFeaturesDto> customerFeatures = null;
 
             try
             {
                 using (var connnection = new SqlConnection(_connectionString))
                 {
-                    customerFeatures = connnection.Query<CustomerFeaturesCollection>("[CustomerFeatures].[GetCustomerFeaturesList]", new {CustomerNumber = customerno},
+                    customerFeatures = connnection.Query<CustomerFeaturesDto>("[GetCustomerFeaturesList]", new {CustomerNumber = customerno},
                         commandType: System.Data.CommandType.StoredProcedure);
                 }
             }
@@ -69,16 +69,16 @@ namespace CustomerFeature.Data
         /// Operation to get details of a configure features for a customer.
         /// </summary>
         /// <returns>Features details</returns>
-        public CustomerFeaturesCollection GetCustomerFeature(string customerno, int featureId)
+        public CustomerFeaturesDto GetCustomerFeature(string customerno, int featureId)
         {
-            IEnumerable<CustomerFeaturesCollection> customerFeatures = null;
-            CustomerFeaturesCollection customerFeature = null;
+            IEnumerable<CustomerFeaturesDto> customerFeatures = null;
+            CustomerFeaturesDto customerFeature = null;
 
             try
             {
                 using (var connnection = new SqlConnection(_connectionString))
                 {
-                    customerFeatures = connnection.Query<CustomerFeaturesCollection>("[CustomerFeatures].[GetCustomerFeature]", new { CustomerNumber = customerno, FeatureId = featureId },
+                    customerFeatures = connnection.Query<CustomerFeaturesDto>("[GetCustomerFeature]", new { CustomerNumber = customerno, FeatureId = featureId },
                         commandType: System.Data.CommandType.StoredProcedure);
                     customerFeature = customerFeatures.FirstOrDefault();
                 }

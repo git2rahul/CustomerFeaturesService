@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CustomerFeature.Data
+namespace CustomerFeature.Repositories
 {
     public interface ICustomerFeatureProvider
     {
-        IEnumerable<CustomerFeaturesCollection> GetAllFeatures();
+        IEnumerable<CustomerFeaturesDto> GetAllFeatures();
 
-        IEnumerable<CustomerFeaturesCollection> GetCustomerFeatures(string customerno);
+        IEnumerable<CustomerFeaturesDto> GetCustomerFeatures(string customerno);
 
-        CustomerFeaturesCollection GetCustomerFeature(string customerno, int featureId);
+        CustomerFeaturesDto GetCustomerFeature(string customerno, int featureId);
     }
 }
