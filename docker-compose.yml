@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: CustomerFeaturesService/Dockerfile
+
+  customerfeaturesapi:
+    image: ${DOCKER_REGISTRY-}customerfeaturesapi
+    build:
+      context: .
+      dockerfile: CustomerFeaturesService/Dockerfile
+

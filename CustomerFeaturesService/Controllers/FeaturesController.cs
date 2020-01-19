@@ -6,6 +6,7 @@ using CustomerFeature.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using CustomerFeaturesApi.CacheStore;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,11 +19,13 @@ namespace CustomerFeaturesApi.Controllers
     {
         private readonly ILogger<FeaturesController> _logger;
         private readonly ICustomerFeatureProvider _customerFeatureProvider;
+        private readonly ICacheRepository _cacheRepository;
 
-        public FeaturesController(ILogger<FeaturesController> logger, ICustomerFeatureProvider customerFeatureProvider)
+        public FeaturesController(ILogger<FeaturesController> logger, ICustomerFeatureProvider customerFeatureProvider, ICacheRepository cacheRepository)
         {
             _logger = logger;
             _customerFeatureProvider = customerFeatureProvider;
+            _cacheRepository = cacheRepository;
         }
 
         #region Get Features
@@ -34,13 +37,12 @@ namespace CustomerFeaturesApi.Controllers
             var Message = $" Action GetFeatures called at {DateTime.UtcNow.ToLongTimeString()}";
             _logger.LogInformation("+++++++++++++ Message displayed +++++++++++++: {Message}", Message);
 
-            
             var features = _customerFeatureProvider.GetAllFeatures();
 
             if (features == null)
-                return NotFound();
+                    return NotFound();
 
-            return Ok(MapFeaturesDto(features.ToList()));
+           return Ok(MapFeaturesDto(new List<CustomerFeaturesDto>()));
         }
 
         #endregion

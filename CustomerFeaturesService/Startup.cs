@@ -1,7 +1,11 @@
+using System;
 using System.IO;
+using System.Text;
 using CustomerFeature.Repositories;
+using CustomerFeaturesApi.CacheStore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,11 +33,20 @@ namespace CustomerFeaturesService
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
+         /*   services.AddDistributedRedisCache(option =>
+            {
+                option.Configuration = Configuration["CustomerFeatureCacheStoreSettings:Redis"];
+            }); */
+
+        /*    services.AddTransient<ICacheRepository, RedIsCache>(); */
+
             services.AddTransient<ICustomerFeatureProvider>(services => new CustomerFeatureProvider(Configuration["CustomerFeatureStoreDatabaseSettings:ConnectionString"]));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDistributedCache cache)
         {
             if (env.IsDevelopment())
             {
@@ -60,6 +73,10 @@ namespace CustomerFeaturesService
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 c.RoutePrefix = string.Empty;
             });
+
+           /* var serverStartTimeString = DateTime.Now.ToString();
+            byte[] val = Encoding.UTF8.GetBytes(serverStartTimeString);
+            cache.Set("lastServerStartTime", val); */
 
         }
     }
